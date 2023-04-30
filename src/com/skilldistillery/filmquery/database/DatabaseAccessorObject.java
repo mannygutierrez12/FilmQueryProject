@@ -26,9 +26,42 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 	
 	@Override
-	public Film findFilmById(int filmId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Film findFilmById(int id) {
+		Film film = null;
+
+		try {
+			String sql = "SELECT * FROM film WHERE id = ?";
+			Connection conn = DriverManager.getConnection(URL, USER, PWD);
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+			
+			if (rs.next()) {
+			      String title = rs.getString("title");
+			      String description = rs.getString("description");
+			      int releaseYear = rs.getShort("release_year");
+			      int languageId = rs.getInt("language_id");
+			      int rentalDuration = rs.getInt("rental_duration");
+			      double rentalRate = rs.getDouble("rental_rate");
+			      int length = rs.getInt("length");
+			      double replacementCost = rs.getDouble("replacement_cost");
+			      String rating = rs.getString("rating");
+			      String specialFeatures = rs.getString("special_features");
+			      
+			      
+			      film = new Film(id, title, description, releaseYear, languageId,
+			                      rentalDuration, rentalRate, length, replacementCost, rating, specialFeatures);
+
+			}
+			
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+		}
+		return film;
 	}
 
 	
