@@ -35,6 +35,11 @@ public class Film {
     }
 
 
+	public Film(int id2, String title2, int releaseYear2, String rating2, String description2, int languageId2) {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public int getId() {
 		return id;
 	}
