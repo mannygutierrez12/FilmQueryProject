@@ -1,5 +1,6 @@
 package com.skilldistillery.filmquery.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Film {
@@ -14,8 +15,13 @@ public class Film {
     private double replacementCost;
     private String rating;
     private String specialFeatures;
+    private List<Actor> actors;
     
-    //List of actors
+   
+    
+   public Film() {
+	   
+   }
  
 
     public Film(int id, String title, String description, int releaseYear, int languageId, int rentalDuration,
@@ -35,7 +41,8 @@ public class Film {
     }
 
 
-	public Film(int id2, String title2, int releaseYear2, String rating2, String description2, int languageId2) {
+
+	public Film(int id, String title, int releaseYear, String rating, String description, int languageId) {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -147,6 +154,17 @@ public class Film {
 
 	public void setSpecialFeatures(String specialFeatures) {
 		this.specialFeatures = specialFeatures;
+	}
+
+	
+
+	public List<Actor> getActors() {
+		return actors;
+	}
+
+
+	public void setActors(List<Actor> actors) {
+		this.actors = actors;
 	}
 
 

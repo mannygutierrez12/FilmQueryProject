@@ -166,7 +166,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	}
 
 
-	public List<Film> findFilmsByKeyword(String keyword) {
+	public List<Film> findFilmsByKeyword(String keyword) throws SQLException {
 	    List<Film> films = new ArrayList<>();
 	  
 
@@ -179,17 +179,17 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	        ResultSet rs = stmt.executeQuery();
 
 	        while (rs.next()) {
-	            int id = rs.getInt("id");
-	            String title = rs.getString("title");
-	            int releaseYear = rs.getInt("release_year");
-	            String rating = rs.getString("rating");
-	            String description = rs.getString("description");
-	            int languageId = rs.getInt("language_id");
-	            
-
-	            Film film = new Film(id, title, releaseYear, rating, description,languageId);
-	            		
-	            films.add(film);
+	        	Film myFilm = new Film();
+	        	
+	        	myFilm.setId(rs.getInt("id"));
+				myFilm.setTitle(rs.getString("title"));
+				myFilm.setDescription(rs.getString("description"));
+				myFilm.setReleaseYear(rs.getInt("release_year"));
+				myFilm.setLanguageId(rs.getInt("language_id"));
+				myFilm.setRating(rs.getString("rating"));
+				
+				films.add(myFilm);      
+	           
 	        }
 
 	        rs.close();
@@ -199,9 +199,15 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
+	    
+	    
+	    for(Film film : films) {
+			List<Actor> actors = findActorsByFilmId(film.getId());
+			film.setActors(actors);
+		}
 
 	    return films;
-	}
-
+	    
+	} 
 
 }
