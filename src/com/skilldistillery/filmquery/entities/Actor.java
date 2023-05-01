@@ -18,12 +18,11 @@ public class Actor {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
-	
+
 	public Actor(String firstName, String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
-
 
 	@Override
 	public String toString() {
@@ -41,8 +40,8 @@ public class Actor {
 	public String getFirstName() {
 		return firstName;
 	}
-	
-	public List<Film> getFilms(){
+
+	public List<Film> getFilms() {
 		List<Film> copy = new ArrayList<>(films);
 		return copy;
 	}
@@ -59,10 +58,9 @@ public class Actor {
 		this.lastName = lastName;
 	}
 
-
 	public void setFilms(List<Film> findFilmByActorId) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

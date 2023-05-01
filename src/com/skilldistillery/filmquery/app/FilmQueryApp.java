@@ -13,7 +13,6 @@ public class FilmQueryApp {
 
 	private DatabaseAccessor db = new DatabaseAccessorObject();
 	private Scanner input = new Scanner(System.in);
-	
 
 	public static void main(String[] args) throws SQLException {
 		FilmQueryApp app = new FilmQueryApp();
@@ -48,7 +47,7 @@ public class FilmQueryApp {
 			}
 		}
 		System.out.println("See you next time!");
-	
+
 	}
 
 	private void filmByFilmId() {
@@ -77,7 +76,7 @@ public class FilmQueryApp {
 			IntLanguageToStringLanguage(film.getLanguageId());
 			System.out.println("Released year: " + film.getReleaseYear());
 			System.out.println("Ratings : " + film.getRating());
-			
+
 			System.out.println("----------------------------------------------");
 			System.out.println("The actors and actresses in this film are:");
 			List<Actor> actors = db.findActorsByFilmId(film.getId());
@@ -94,22 +93,22 @@ public class FilmQueryApp {
 		} else {
 			System.out.println("We have not found a field that matched your criteria");
 		}
-	
+
 	}
 
 	private void filmByKeyword() throws SQLException {
 		Scanner input = new Scanner(System.in);
 		boolean notDoneYet = true;
 		while (notDoneYet) {
-		    System.out.println("Please enter a keyword");
-		    String keyword = input.nextLine();
-		    List<Film> films = db.findFilmsByKeyword(keyword);
+			System.out.println("Please enter a keyword");
+			String keyword = input.nextLine();
+			List<Film> films = db.findFilmsByKeyword(keyword);
 
-		    if (films != null && films.size() > 0) {
-		        System.out.println(films.size() + " result(s) were found:");
-		        
-		        for (Film film : films) {
-		        	System.out.println();
+			if (films != null && films.size() > 0) {
+				System.out.println(films.size() + " result(s) were found:");
+
+				for (Film film : films) {
+					System.out.println();
 					System.out.println("                    MOVIE INFORMATION");
 					System.out.println("----------------------------------------------------------");
 					System.out.println("Title: " + film.getTitle());
@@ -121,24 +120,24 @@ public class FilmQueryApp {
 					System.out.println("Released year: " + film.getReleaseYear());
 					System.out.println("Ratings : " + film.getRating());
 
-		            System.out.println("----------------------------------------------");
-		            System.out.println("The Actors in this film are:");
-		            List<Actor> actors = db.findActorsByFilmId(film.getId());
-		            if (actors != null && actors.size() > 0) {
-		                System.out.println("Actors:");
-		                for (Actor actor : actors) {
-		                    System.out.println("-" + actor.getFirstName() + " " + actor.getLastName());
-		                }
-		                notDoneYet = false;
-		            } else {
-		                System.out.println("No actors found for this film.");
-		            }
+					System.out.println("----------------------------------------------");
+					System.out.println("The Actors in this film are:");
+					List<Actor> actors = db.findActorsByFilmId(film.getId());
+					if (actors != null && actors.size() > 0) {
+						System.out.println("Actors:");
+						for (Actor actor : actors) {
+							System.out.println("-" + actor.getFirstName() + " " + actor.getLastName());
+						}
+						notDoneYet = false;
+					} else {
+						System.out.println("No actors found for this film.");
+					}
 
-		            System.out.println();
-		        }
-		    } else {
-		        System.out.println("No films found with the keyword: " + keyword);
-		    }
+					System.out.println();
+				}
+			} else {
+				System.out.println("No films found with the keyword: " + keyword);
+			}
 
 		}
 
